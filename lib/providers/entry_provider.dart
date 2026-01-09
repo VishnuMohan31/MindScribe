@@ -10,7 +10,7 @@ import '../services/notification_service.dart';
 
 class EntryProvider with ChangeNotifier {
   final DatabaseHelper _db = DatabaseHelper.instance;
-  // final NotificationService _notifications = NotificationService.instance;
+  final NotificationService _notifications = NotificationService.instance;
   
   // Logger for production-ready logging
   final Logger _logger = Logger(
@@ -64,14 +64,14 @@ class EntryProvider with ChangeNotifier {
           await _db.createReminder(reminder);
           
           // Schedule notification if reminder is active and in the future
-          // if (reminder.isActive && reminder.reminderTime.isAfter(DateTime.now())) {
-          //   try {
-          //     await _notifications.scheduleEntryNotification(entry, reminder);
-          //     _logger.d('   ✅ Reminder scheduled for: ${reminder.reminderTime}');
-          //   } catch (e) {
-          //     _logger.e('   ❌ Failed to schedule reminder ${reminder.id}: $e');
-          //   }
-          // }
+          if (reminder.isActive && reminder.reminderTime.isAfter(DateTime.now())) {
+            try {
+              await _notifications.scheduleEntryNotification(entry, reminder);
+              _logger.d('   ✅ Reminder scheduled for: ${reminder.reminderTime}');
+            } catch (e) {
+              _logger.e('   ❌ Failed to schedule reminder ${reminder.id}: $e');
+            }
+          }
         }
         
         _logger.i('✅ Finished scheduling reminders');
@@ -100,7 +100,7 @@ class EntryProvider with ChangeNotifier {
         // Cancel existing notifications
         for (var existingReminder in existingReminders) {
           if (existingReminder.id != null) {
-            // await _notifications.cancelNotification(existingReminder.id!);
+            await _notifications.cancelNotification(existingReminder.id!);
           }
         }
         
@@ -112,14 +112,14 @@ class EntryProvider with ChangeNotifier {
           await _db.createReminder(reminder);
           
           // Schedule notification if reminder is active and in the future
-          // if (reminder.isActive && reminder.reminderTime.isAfter(DateTime.now())) {
-          //   try {
-          //     await _notifications.scheduleEntryNotification(entry, reminder);
-          //     _logger.d('   ✅ Reminder rescheduled for: ${reminder.reminderTime}');
-          //   } catch (e) {
-          //     _logger.e('   ❌ Failed to reschedule reminder ${reminder.id}: $e');
-          //   }
-          // }
+          if (reminder.isActive && reminder.reminderTime.isAfter(DateTime.now())) {
+            try {
+              await _notifications.scheduleEntryNotification(entry, reminder);
+              _logger.d('   ✅ Reminder rescheduled for: ${reminder.reminderTime}');
+            } catch (e) {
+              _logger.e('   ❌ Failed to reschedule reminder ${reminder.id}: $e');
+            }
+          }
         }
         
         _logger.i('✅ Finished updating reminders');
@@ -141,7 +141,7 @@ class EntryProvider with ChangeNotifier {
       final reminders = await _db.getRemindersForEntry(id);
       for (var reminder in reminders) {
         if (reminder.id != null) {
-          // await _notifications.cancelNotification(reminder.id!);
+          await _notifications.cancelNotification(reminder.id!);
           _logger.d('   ✅ Cancelled notification for reminder ${reminder.id}');
         }
       }
@@ -276,7 +276,7 @@ class EntryProvider with ChangeNotifier {
   // Test notification system
   Future<void> testNotifications() async {
     try {
-      // await _notifications.testNotification();
+      await _notifications.testNotification();
     } catch (e) {
       rethrow;
     }
@@ -285,7 +285,7 @@ class EntryProvider with ChangeNotifier {
   // Reset notification system (if notifications are broken)
   Future<void> resetNotificationSystem() async {
     try {
-      // await _notifications.initialize();
+      await _notifications.initialize();
     } catch (e) {
       rethrow;
     }
@@ -298,13 +298,13 @@ class EntryProvider with ChangeNotifier {
       
       final testTime = DateTime.now().add(const Duration(seconds: 10));
       
-      // await _notifications.scheduleNotification(
-      //   id: 999998,
-      //   title: '🧪 10-Second Test',
-      //   body: 'This notification was scheduled 10 seconds ago!',
-      //   scheduledTime: testTime,
-      //   payload: 'test_notification',
-      // );
+      await _notifications.scheduleNotification(
+        id: 999998,
+        title: '🧪 10-Second Test',
+        body: 'This notification was scheduled 10 seconds ago!',
+        scheduledTime: testTime,
+        payload: 'test_notification',
+      );
       
       _logger.i('Test notification scheduled for: $testTime');
     } catch (e) {
@@ -316,7 +316,7 @@ class EntryProvider with ChangeNotifier {
   // Debug: Advanced scheduling test
   Future<void> debugAdvancedTest() async {
     try {
-      // await _notifications.debugScheduleTest();
+      await _notifications.debugScheduleTest();
     } catch (e) {
       _logger.e('Advanced debug test failed: $e');
       rethrow;

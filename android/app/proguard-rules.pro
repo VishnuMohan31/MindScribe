@@ -1,5 +1,11 @@
 # MindScribe ProGuard Rules for Production
 
+# Suppress warnings
+-dontwarn org.slf4j.**
+-dontwarn javax.annotation.**
+-dontwarn kotlin.**
+-dontwarn kotlinx.**
+
 # Keep Flutter wrapper
 -keep class io.flutter.app.** { *; }
 -keep class io.flutter.plugin.**  { *; }
@@ -49,3 +55,9 @@
     public static *** v(...);
     public static *** i(...);
 }
+
+# Suppress desugaring warnings
+-dontwarn j$.util.concurrent.ConcurrentHashMap
+-dontwarn j$.util.IntSummaryStatistics
+-dontwarn j$.util.LongSummaryStatistics
+-dontwarn j$.util.DoubleSummaryStatistics

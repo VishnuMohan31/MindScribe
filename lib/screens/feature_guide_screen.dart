@@ -41,6 +41,18 @@ class _FeatureGuideScreenState extends State<FeatureGuideScreen>
         ),
         bottom: TabBar(
           controller: _tabController,
+          labelColor: Colors.white,
+          unselectedLabelColor: Colors.white70,
+          indicatorColor: Colors.white,
+          indicatorWeight: 3,
+          labelStyle: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+          ),
+          unselectedLabelStyle: const TextStyle(
+            fontWeight: FontWeight.normal,
+            fontSize: 14,
+          ),
           tabs: const [
             Tab(text: 'Features', icon: Icon(Icons.star_rounded)),
             Tab(text: 'How To', icon: Icon(Icons.help_outline_rounded)),

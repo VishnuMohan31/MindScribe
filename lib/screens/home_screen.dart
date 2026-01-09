@@ -135,50 +135,54 @@ class _HomeScreenState extends State<HomeScreen> {
         final entries = entryProvider.entries;
 
         if (entries.isEmpty) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                // Show QuickStart widget for new users or version updates
-                if (_showQuickStart)
-                  QuickStartWidget(
-                    onDismiss: () {
-                      setState(() {
-                        _showQuickStart = false;
-                      });
-                    },
-                  ),
-                
-                // Empty state
-                Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.note_add_rounded,
-                        size: 100,
-                        color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-                      ),
-                      const SizedBox(height: 24),
-                      Text(
-                        'No Entries Yet',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          fontWeight: FontWeight.bold,
+          return Column(
+            children: [
+              // Show QuickStart widget for new users or version updates
+              if (_showQuickStart)
+                QuickStartWidget(
+                  onDismiss: () {
+                    setState(() {
+                      _showQuickStart = false;
+                    });
+                  },
+                ),
+              
+              // Empty state - Properly centered
+              Expanded(
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.note_add_rounded,
+                          size: 100,
+                          color: Theme.of(context).colorScheme.primary.withOpacity(0.3),
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Text(
-                        'Tap the + button to create your first entry',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.grey,
+                        const SizedBox(height: 24),
+                        Text(
+                          'No Entries Yet',
+                          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
+                        const SizedBox(height: 12),
+                        Text(
+                          'Tap the + button to create your first entry',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: Colors.grey,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         }
 

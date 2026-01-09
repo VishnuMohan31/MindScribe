@@ -2,22 +2,22 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  // Clean Standard Colors (Google Material Design)
-  static const Color primaryBlue = Color(0xFF1976D2); // Material Blue 700
-  static const Color primaryLight = Color(0xFF42A5F5); // Material Blue 400
-  static const Color primaryDark = Color(0xFF0D47A1); // Material Blue 900
+  // Enhanced Modern Colors (Vibrant & Professional)
+  static const Color primaryBlue = Color(0xFF1E88E5); // Brighter Blue 600
+  static const Color primaryLight = Color(0xFF64B5F6); // Light Blue 300
+  static const Color primaryDark = Color(0xFF1565C0); // Deep Blue 800
   
-  static const Color accentTeal = Color(0xFF00897B); // Material Teal 600
-  static const Color accentOrange = Color(0xFFFF6F00); // Material Orange 900
-  static const Color accentGreen = Color(0xFF43A047); // Material Green 600
-  static const Color accentPurple = Color(0xFF7B1FA2); // Material Purple 700
-  static const Color accentAmber = Color(0xFFFFA000); // Material Amber 700
+  static const Color accentTeal = Color(0xFF00ACC1); // Bright Teal 500
+  static const Color accentOrange = Color(0xFFFF7043); // Vibrant Orange 400
+  static const Color accentGreen = Color(0xFF66BB6A); // Fresh Green 400
+  static const Color accentPurple = Color(0xFFAB47BC); // Rich Purple 400
+  static const Color accentAmber = Color(0xFFFFB74D); // Warm Amber 300
   
-  // Background Colors
-  static const Color backgroundLight = Color(0xFFFAFAFA); // Light grey
-  static const Color backgroundDark = Color(0xFF121212); // Material dark
+  // Background Colors (Enhanced)
+  static const Color backgroundLight = Color(0xFFF5F5F5); // Softer light grey
+  static const Color backgroundDark = Color(0xFF0D1117); // Richer dark blue-grey
   static const Color cardLight = Color(0xFFFFFFFF);
-  static const Color cardDark = Color(0xFF1E1E1E);
+  static const Color cardDark = Color(0xFF161B22); // Slightly lighter dark for better contrast
   
   // Text Colors
   static const Color textPrimary = Color(0xFF212121);
@@ -80,7 +80,7 @@ class AppTheme {
       ),
     ),
     
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -172,7 +172,7 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       elevation: 0,
       centerTitle: false,
-      backgroundColor: cardDark,
+      backgroundColor: primaryBlue,
       foregroundColor: Colors.white,
       titleTextStyle: TextStyle(
         fontSize: 24,
@@ -182,7 +182,7 @@ class AppTheme {
       ),
     ),
     
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
@@ -243,9 +243,17 @@ class AppTheme {
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: cardDark,
       selectedItemColor: primaryBlue,
-      unselectedItemColor: textSecondary,
+      unselectedItemColor: Colors.grey,
       elevation: 8,
       type: BottomNavigationBarType.fixed,
+      selectedLabelStyle: TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: 12,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontWeight: FontWeight.normal,
+        fontSize: 12,
+      ),
     ),
   );
 
